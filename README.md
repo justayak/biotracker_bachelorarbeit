@@ -1,2 +1,2 @@
-# biotracker_bachelorarbeit
+# BioTracker Bachelorarbeit
 My bachelor thesis repo
