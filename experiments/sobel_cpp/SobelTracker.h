@@ -17,5 +17,6 @@ class SobelTracker : public TrackingAlgorithm {
     void paintOverlay(QPainter *painter, View const &view = OriginalView) override;
 
   private:
-    std::shared_ptr<QFrame> m_toolsFrame;
+    cv::Mat &m_mat;
+
 };
