@@ -4,7 +4,7 @@ from biotracker import (
     Button,
     run_client
 )
-import resource
+#import resource
 import time
 import numpy as np
 from scipy import signal
@@ -12,21 +12,21 @@ from scipy import signal
 Mat = None
 Kx = np.array([[-1,0,1],[-2,0,2],[-1,0,1]])
 Ky = Kx.T
-KiBs = np.zeros((305,1), dtype=np.float64)
-Elap = np.zeros((305,1), dtype=int)
+#KiBs = np.zeros((305,1), dtype=np.float64)
+#Elap = np.zeros((305,1), dtype=int)
 show_x = True
-last_elapsed = 0
+#last_elapsed = 0
 
-def inc_time(frame):
-    global Elap, last_elapsed
-    if frame > 0:
-        last_elap = Elap[frame-1]
-        current_el = int(time.time() * 1000) - last_elapsed
-        Elap[frame] = last_elap + current_el
-    last_elapsed = int(time.time() * 1000)
+#def inc_time(frame):
+#    global Elap, last_elapsed
+#    if frame > 0:
+#        last_elap = Elap[frame-1]
+#        current_el = int(time.time() * 1000) - last_elapsed
+#        Elap[frame] = last_elap + current_el
+#    last_elapsed = int(time.time() * 1000)
 
 def track(frame, M):
-    global Mat, Kx, Ky, show_x, KiBs, Elap
+    global Mat, Kx, Ky, show_x
     M = Helper.rgb2gray(M)
     direc = "y"
     if show_x:
@@ -38,8 +38,8 @@ def track(frame, M):
     else:
         Mat = signal.convolve2d(M, Ky, boundary='symm', mode='same')
 
-    inc_time(frame)
-    KiBs[frame] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    #inc_time(frame)
+    #KiBs[frame] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 
 def paint(frame):
     global Mat
@@ -63,11 +63,11 @@ def request_widgets():
 
 
 def shutdown():
-    global KiBs, Elap
-    with open("mem", 'a') as out:
-        for i in range(0, 305):
-            out.write(str(Elap[i,0]) + "," + str(KiBs[i,0]) + '\n') 
-
+    #global KiBs, Elap
+    #with open("mem", 'a') as out:
+    #    for i in range(0, 305):
+    #        out.write(str(Elap[i,0]) + "," + str(KiBs[i,0]) + '\n') 
+    pass
 
 run_client(
     track,
